@@ -7,16 +7,19 @@
 //
 
 import UIKit
+import Alamofire
 
 class FriendTableViewController: UITableViewController {
     
     // MARK: Properties
     
     var friends = [User]()
+    var selectedFriends = [User]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.tableView.allowsMultipleSelection = true
         // fetch the user's friends
         loadFriends(userId: 1)
     }
@@ -48,8 +51,13 @@ class FriendTableViewController: UITableViewController {
         cell.usernameLabel.text = friend.username
         cell.userPhotoImageView.image = friend.photo
 
+        // check selected friends
+        cell.accessoryType = cell.isSelected ? .checkmark : .none
+        //cell.selectionStyle = .none
+
         return cell
     }
+    
 
     /*
     // Override to support conditional editing of the table view.
@@ -86,36 +94,49 @@ class FriendTableViewController: UITableViewController {
     }
     */
 
-    /*
+
     // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        super.prepare(for: segue, sender: sender)
+        
+        switch(segue.identifier ?? "") {
+        
+        case "ShowGong":
+            guard let gongViewController = segue.destination as? GongViewController else {
+                fatalError("Unexpected Destination: \(segue.destination)")
+            }
+            gongViewController.friends = selectedFriends
+        
+        case "AddFriend":
+            print("adding friend")
+        
+        default:
+            fatalError("Unexpected Segue Identifier; \(segue.identifier)")
+            
+        }
     }
-    */
+
     
     // MARK: Private Methods
     
     private func loadFriends(userId: Int) {
-        
         let photo = UIImage(named: "defaultUserProfilePhoto")
         
-        // this will become a network request
-        guard let friend2 = User(userId: 2, username: "billy", photo: photo) else {
-            fatalError("Unable to instantiate friend 2")
+        Alamofire.request("https://gng-app.herokuapp.com/users/\(userId)/friends").responseJSON { response in
+        //Alamofire.request("http://localhost/users/1/friends").responseJSON { response in
+            if let friendList = response.result.value {
+                for friend in friendList as! [Dictionary<String, AnyObject>] {
+                    let userId = friend["userId"] as! Int
+                    let username = friend["username"] as! String
+                    guard let friend = User(userId: userId, username: username, photo: photo) else {
+                        fatalError("Unable to instantiate friend \(username) \(userId)")
+                    }
+                    self.friends += [friend]
+                }
+            }
+            self.tableView.reloadData()
         }
-        
-        guard let friend3 = User(userId: 3, username: "sally", photo: photo) else {
-            fatalError("Unable to instantiate friend 3")
-        }
-        
-        guard let friend4 = User(userId: 4, username: "martha", photo: photo) else {
-            fatalError("Unable to instantiate friend 4")
-        }
-        
-        friends += [friend2, friend3, friend4]
     }
 
 }

@@ -54,12 +54,12 @@
                     <navigationItem key="navigationItem" title="Friends" id="qgc-dP-a6v">
                         <barButtonItem key="leftBarButtonItem" systemItem="add" id="lQ8-k4-MYw">
                             <connections>
-                                <segue destination="Q0R-9u-g0U" kind="presentation" id="Nfq-WX-bgu"/>
+                                <segue destination="Q0R-9u-g0U" kind="presentation" identifier="AddFriend" id="Nfq-WX-bgu"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Gong" id="VWx-oU-rPz">
                             <connections>
-                                <segue destination="N6F-I9-0pf" kind="showDetail" action="showViewController:sender:" id="nSg-QV-ckW"/>
+                                <segue destination="BYZ-38-t0r" kind="show" identifier="ShowGong" id="dXN-DY-rHg"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -105,7 +105,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fpc-bf-Iiw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2327" y="770"/>
+            <point key="canvasLocation" x="1145" y="985"/>
         </scene>
         <!--Hit it-->
         <scene sceneID="tne-QT-ifu">
@@ -155,7 +155,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="4096.8000000000002" y="221.73913043478262"/>
+            <point key="canvasLocation" x="1146" y="222"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="WP8-8G-4hG">
@@ -178,6 +178,7 @@
         <!--Navigation Controller-->
         <scene sceneID="XOc-Fy-M2C">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="XgB-os-TAq" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Q0R-9u-g0U" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Wi0-JD-sal">
@@ -189,27 +190,8 @@
                         <segue destination="keF-Qa-laI" kind="relationship" relationship="rootViewController" id="GGH-Fq-kEL"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="XgB-os-TAq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1239" y="770"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="o2a-3u-JTd">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="N6F-I9-0pf" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="yqe-Gx-2Ni">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="hNh-IO-XTe"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="vGp-HE-uSb" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3157.5999999999999" y="221.73913043478262"/>
+            <point key="canvasLocation" x="329" y="985"/>
         </scene>
     </scenes>
     <resources>
